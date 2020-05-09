@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> CARIT </title>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script> 
+$(document).ready(function()
+	{
+	$('#form2').hide();
+	$('#form3').hide();
+	$('#form_app2').hide();
+	})
+	
+	
+</script>
+</head>
+
+<body>
+<div class="topnav">
+
+	<h1><a href="http://ccse.kennesaw.edu"><img class="logo" src="pictures/KSUlogo.png "></a> Center for Applied Research in Information Technology  </h1>
+	
+  <a href="index.html">Home</a>
+  <a href="research.html">Research</a>
+  <a href="about_us.html">About Us</a>
+  <a href="careers.html"class="active">Careers</a>
+</div>
+
+<h2>Openings</h2>
+
+<p>CARIT has a few openings for undergraduate and graduate students: </p>
+<ul>
+	<li>Mobile Development assistant (undergraduate only)</p>
+	<li>Data Analytics assistant(undergraduate only)</p>
+	<li>Web development assistant (graduate only)</p>
+	<li>Business Intelligence assistant (graduate only)</p>
+</ul>
+
+<section>
+
+<h2>Application Form</h2>
+<p>To apply, please feel out the form below.</p>
+<div class="form_app">
+<form name="form1" action="" onsubmit="">
+<label> Student status:</label>
+<select id="status" name="status">
+<option value="None">Select an Option:</option>
+<option value="undergraduate">Undergraduate</option>
+<option value="graduate">Graduate</option>
+</select>
+
+</form>
+
+<form name="form2" id="form2" action="" onsubmit="">
+<label for> Which position are you interested in?</label>
+<select id="position" name="position">
+<option value="None" >Select an Option:</option>
+<option value="position1" id="position1">Position1</option>
+<option value="position2"id="position2">Position2</option>
+</select>
+
+</form>
+</div>
+<div class="form_app">
+
+<form  name="form3" id="form3" action=" " onsubmit="">
+<label>Select your grades for the following courses:</label></br>
+	<label for="course1" id="c1"> Course1: </label>
+	<select id="course1" name="course1">
+		<option value="4">A</option>
+		<option value="3">B</option>
+		<option value="2">C</option>
+		<option value="1">D</option>
+		<option value="0">F</option>
+	</select>
+	</br>
+	<label for="course2" id="c2"> Course2: </label>
+	<select id="course2" name="course2">
+		<option value="4">A</option>
+		<option value="3">B</option>
+		<option value="2">C</option>
+		<option value="1">D</option>
+		<option value="0">F</option>
+	</select>
+	</br>
+	<label for="course3" id="c3"> Course3: </label>
+	<select id="course3" name="course3">
+		<option value="4">A</option>
+		<option value="3">B</option>
+		<option value="2">C</option>
+		<option value="1">D</option>
+		<option value="0">F</option>
+	</select>
+	</br>
+<input type="submit" value="Evaluate" onclick="return f_evaluate()">
+</form>
+</div>
+
+<div id="form_app2" class="form_app2";>
+<p id="qualify_message" > </p>
+</div>
+<script>
+
+//when form1 change, change form2 options then show
+document.getElementById("status").onchange = function(){f_studentStatus()};
+var final_status;
+function f_studentStatus()
+{
+var status=document.forms["form1"]["status"].value;
+if (status=="undergraduate")
+	{
+	document.getElementById("position1").innerHTML="Mobile Development assistant";
+	document.getElementById("position2").innerHTML="Data Analytics assistant";
+	}
+else if (status=="graduate")
+	{
+	document.getElementById("position1").innerHTML="Web development assistant";
+	document.getElementById("position2").innerHTML="Business Intelligence assistant";
+	}
+else{alert("Please select appropriate student status");}
+	
+$('#form2').show();
+final_status=status;
+}
+
+//when form2 change, change form3 options then show
+document.getElementById("position").onchange = function(){f_position()};
+
+function f_position()
+{
+var position=document.forms["form2"]["position"].value;
+var u1c1="CSE 3203 Mobile System Overview";
+var u1c2="IT 4213 Mobile Web Development";
+var u1c3="IT 1323 Advanced Programming Principles";
+
+var u2c1="IT 4153 Advanced Database";
+var u2c2="IT 4713 BI Systems";
+var u2c3="IT 4323 Data Communications & Networking";
+
+var g1c1="IT 6203 IT Design Studio";
+var g1c2="IT 6753 Advanced Web";
+var g1c3="IT 5433 Databases: Design and Applications";
+
+var g2c1="IT 6713 Business Intelligence";
+var g2c2="IT 7113 Data Visualization";
+var g2c3="IT 6773 Practical Data Analytics";
+
+if (final_status=="undergraduate" && position=="position1")
+	{
+	
+	document.getElementById("c1").innerHTML=u1c1;
+	document.getElementById("c2").innerHTML=u1c2;
+	document.getElementById("c3").innerHTML=u1c3;
+	}
+else if (final_status=="undergraduate" && position=="position2")
+	{
+	document.getElementById("c1").innerHTML=u2c1;
+	document.getElementById("c2").innerHTML=u2c2;
+	document.getElementById("c3").innerHTML=u2c3;
+	}
+else if (final_status=="graduate" && position=="position1")
+	{
+	
+	document.getElementById("c1").innerHTML=g1c1;
+	document.getElementById("c2").innerHTML=g1c2;
+	document.getElementById("c3").innerHTML=g1c3;
+	}
+else if (final_status=="graduate" && position=="position2")
+	{
+	document.getElementById("c1").innerHTML=g2c1;
+	document.getElementById("c2").innerHTML=g2c2;
+	document.getElementById("c3").innerHTML=g2c3;
+	}
+else{alert("Please select a position to apply");}
+
+$('#form3').show();
+
+}
+
+//calculate gpa
+function f_evaluate()
+{
+
+	var grade1=parseInt(document.forms["form3"]["course1"].value);
+	var grade2=parseInt(document.forms["form3"]["course2"].value);
+	var grade3=parseInt(document.forms["form3"]["course3"].value);
+	var gpa=((grade1+grade2+grade3)/3).toFixed(2);
+
+	
+	if(final_status=="undergraduate" && gpa>=3.2)
+	{
+	document.getElementById("qualify_message").innerHTML="Your GPA: "+gpa+"</br></br>Congratulations! You qualify for the position. Please use the web application <a href='https://kennesaw.joinhandshake.com/login'>Hanshake</a> to finalize the application process";
+	document.getElementById("form_app2").style.backgroundColor="green";
+	}
+	else if(final_status=="graduate" && gpa>=3.7)
+	{
+	document.getElementById("qualify_message").innerHTML="Your GPA: "+gpa+"</br></br>Congratulations! You qualify for the position.  Please use the web application <a href='https://kennesaw.joinhandshake.com/login'>Hanshake</a> to finalize the application process";
+	document.getElementById("form_app2").style.backgroundColor="green";
+	}
+	else
+	{
+	document.getElementById("qualify_message").innerHTML="Your GPA: "+gpa+"</br></br>Unfortunately you do not qualify for the position at this time";
+	document.getElementById("form_app2").style.backgroundColor="red";
+	}
+	$('#form_app2').show();
+	return false;
+	
+}
+
+
+
+</script>
+
+<footer>
+<p> This website is a project assignment for KSU IT 3203&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   
+  Created by: Denise Mutombo &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;    
+  Contact information: <a href="mailto:dmutomb1@students.kennesaw.edu">dmutomb1@students.kennesaw.edu</a>.</p>
+</footer>
+
+
+</body>
+</html>
